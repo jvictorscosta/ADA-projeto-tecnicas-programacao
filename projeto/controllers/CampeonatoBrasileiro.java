@@ -13,7 +13,7 @@ public class CampeonatoBrasileiro {
         CartaoRepository cartaoRepository = new CartaoRepository();
         EstatisticaRepository estatisticaRepository = new EstatisticaRepository();
         GolsRepository golsRepository = new GolsRepository();
-        PartidaRepository partidaRepository = new PartidaRepository;
+        PartidaRepository partidaRepository = new PartidaRepository();
         Service service = new Service(cartaoRepository,estatisticaRepository, golsRepository,  partidaRepository);
     }
     public void showMenu(){
