@@ -1,6 +1,6 @@
 package projeto.repository;
 
-import projeto.domain.Gol;
+
 import projeto.domain.Partida;
 
 import java.io.IOException;
@@ -10,24 +10,31 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.stream.Stream;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class PartidaRepository {
-    public static void main(String[] args) throws IOException {
-        Path pathfull = Paths.get("projeto/repository/campeonato-brasileiro-full.csv");
-        Stream<String> lines = Files.lines(pathfull);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
-        //lines.forEach(System.out::println);
 
-        lines.skip(1).forEach(string -> {
-            String[] partidas = string.split(",");
+
+    public class PartidaRepository {
+
+        public List<Partida> obterPartidas() throws IOException {
+            Path pathfull = Paths.get("projeto/repository/campeonato-brasileiro-full.csv");
+
+            return Files.lines(pathfull)
+                    .skip(1) // Pular o cabeçalho
+                    .map(line -> line.split(","))
+                    .map(this::criarPartida)
+                    .collect(Collectors.toList());
+        }
+        private Partida criarPartida(String[] partidas) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+            DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
 
             Partida partida = new Partida();
             partida.setId(partidas[0].replaceAll("\"", ""));
             partida.setRodada(partidas[1].replaceAll("\"", ""));
             partida.setData(LocalDate.parse(partidas[2].replaceAll("\"", ""), formatter));
-            partida.setHora(LocalTime.parse(partidas[3].replaceAll("\"", ""),formatterTime));
+            partida.setHora(LocalTime.parse(partidas[3].replaceAll("\"", ""), formatterTime));
             partida.setMandante(partidas[4].replaceAll("\"", ""));
             partida.setVisitante(partidas[5].replaceAll("\"", ""));
             partida.setFormacaoMandante(partidas[6].replaceAll("\"", ""));
@@ -40,6 +47,6 @@ public class PartidaRepository {
             partida.setVisitantePlacar(partidas[13].replaceAll("\"", ""));
             partida.setMandanteEstado(partidas[14].replaceAll("\"", ""));
             partida.setVisitanteEstado(partidas[15].replaceAll("\"", ""));
-            System.out.println(partida);});
-    }
+            return partida;
+        }
 }

@@ -1,28 +1,27 @@
 package projeto.repository;
 
 import projeto.domain.Estatistica;
-import projeto.domain.Partida;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.stream.Stream;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class EstatisticaRepository {
 
-    public static void main(String[] args) throws IOException {
-        Path pathEstatistica = Paths.get("projeto/repository/campeonato-brasileiro-full.csv");
-        Stream<String> lines = Files.lines(pathEstatistica);
+    public class EstatisticaRepository {
 
-        //lines.forEach(System.out::println);
+        public List<Estatistica> obterEstatisticas() throws IOException {
+            Path pathEstatistica = Paths.get("projeto/repository/campeonato-brasileiro-full.csv");
 
-        lines.skip(1).forEach(string -> {
-            String[] estatisticas = string.split(",");
-//"partida_id","rodata","clube","chutes","chutes_no_alvo","posse_de_bola","passes","precisao_passes","faltas","cartao_amarelo","cartao_vermelho","impedimentos","escanteios"
+            return Files.lines(pathEstatistica)
+                    .skip(1) // Pular o cabeçalho
+                    .map(line -> line.split(","))
+                    .map(this::criarEstatistica)
+                    .collect(Collectors.toList());
+        }
+
+        private Estatistica criarEstatistica(String[] estatisticas) {
             Estatistica estatistica = new Estatistica();
             estatistica.setPartida_id(estatisticas[0].replaceAll("\"", ""));
             estatistica.setRodada(estatisticas[1].replaceAll("\"", ""));
@@ -37,7 +36,6 @@ public class EstatisticaRepository {
             estatistica.setCartao_vermelho(estatisticas[10].replaceAll("\"", ""));
             estatistica.setImpedimentos(estatisticas[11].replaceAll("\"", ""));
             estatistica.setEscanteios(estatisticas[12].replaceAll("\"", ""));
-
-            System.out.println(estatistica);});
+            return estatistica;
+        }
     }
-}
