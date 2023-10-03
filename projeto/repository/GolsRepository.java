@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-public class golsRepository {
+public class GolsRepository {
     public static void main(String[] args) throws IOException{
         Path pathGol = Paths.get("projeto/repository/campeonato-brasileiro-gols.csv");
         Stream<String> lines = Files.lines(pathGol);
@@ -18,7 +18,6 @@ public class golsRepository {
                     String[] gols = string.split(",");
 
                     Gol gol = new Gol();
-                    //int partida_id, int rodada, String clube, String atleta, int minuto, String tipo_de_gol
                     gol.setPartida_id(gols[0].replaceAll("\"", ""));
                     gol.setRodada(gols[1].replaceAll("\"", ""));
                     gol.setClube(gols[2].replaceAll("\"", ""));
