@@ -72,11 +72,11 @@ public class Gol {
     public String toString() {
         return "DadosPartida{" +
                 "Id da partida=" + partida_id +
-                ", rodada=" + rodada +
-                ", clube='" + clube +'\''  +
-                ", atleta='" + atleta + '\'' +
-                ", minuto=" + minuto +
-                ", tipoDeGol='" + tipo_de_gol + '\'' +
+                ", Rodada=" + rodada +
+                ", Clube='" + clube +'\''  +
+                ", Atleta='" + atleta + '\'' +
+                ", Minutos=" + minuto +
+                ", Tipo De Gol='" + tipo_de_gol + '\'' +
                 '}';
     }
 }
