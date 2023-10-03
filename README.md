@@ -3,7 +3,9 @@ Projeto realizado na disciplina de tecnicas de programação do santander coders
 
 Integrantes:
 [jvic](https://github.com/jvictorscosta)https://github.com/jvictorscosta
-
+https://github.com/Leonardo7Silva
+https://github.com/PedroHenriqueGuerra
+https://github.com/thales-sz
 
 
 
