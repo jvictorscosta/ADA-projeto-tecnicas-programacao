@@ -2,10 +2,10 @@
 Projeto realizado na disciplina de tecnicas de programação do santander coders 
 
 Integrantes:
-[jvic](https://github.com/jvictorscosta)https://github.com/jvictorscosta
-https://github.com/Leonardo7Silva
-https://github.com/PedroHenriqueGuerra
-https://github.com/thales-sz
+- [Joao Victor](https://github.com/jvictorscosta)https://github.com/jvictorscosta
+- [Leonardo Silva]https://github.com/Leonardo7Silva
+- [Pedro Henrique]https://github.com/PedroHenriqueGuerra
+- [Thales]https://github.com/thales-sz
 
 
 
