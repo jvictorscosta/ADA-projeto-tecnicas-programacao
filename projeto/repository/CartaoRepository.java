@@ -1,7 +1,6 @@
 package projeto.repository;
 
 import projeto.domain.Cartao;
-import projeto.domain.Partida;
 
 import java.io.IOException;
 import java.nio.file.Files;

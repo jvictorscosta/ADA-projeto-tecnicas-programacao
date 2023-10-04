@@ -15,12 +15,5 @@ public class CampeonatoBrasileiro {
         System.out.println("7: O jogador que mais recebeu cartões vermelhos");
         System.out.println("8: O placar da partida com mais gols.");
         System.out.println("0: Para sair.");
-
     }
-
-
-
-
-
-
 }

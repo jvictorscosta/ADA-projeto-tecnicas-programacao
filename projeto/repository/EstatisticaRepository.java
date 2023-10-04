@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
         public List<Estatistica> obterEstatisticas() throws IOException {
             Path pathEstatistica = Paths.get("projeto/repository/campeonato-brasileiro-full.csv");
-
             return Files.lines(pathEstatistica)
                     .skip(1) // Pular o cabeçalho
                     .map(line -> line.split(","))
