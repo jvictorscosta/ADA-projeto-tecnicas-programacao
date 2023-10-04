@@ -8,7 +8,7 @@ import projeto.service.employee.Service;
 
 import java.io.IOException;
 
-public class Main {
+public class main {
     public static void main(String[] args) throws IOException {
         CartaoRepository cartaoRepository = new CartaoRepository();
         EstatisticaRepository estatisticaRepository = new EstatisticaRepository();
@@ -18,8 +18,5 @@ public class Main {
         Service service = new Service(cartaoRepository, estatisticaRepository, golsRepository, partidaRepository);
 
         System.out.println(service.mostrarTimeComMaisVitoria());
-        System.out.println(service.estadiosComMenosJogos());
-        System.out.println(service.jogadorComMaisAmarelos());
-        System.out.println(service.jogadorComMaisVermelhos());
     }
 }

@@ -6,15 +6,23 @@ import projeto.repository.GolsRepository;
 import projeto.repository.PartidaRepository;
 import projeto.service.employee.Service;
 
+import java.io.IOException;
+
 public class CampeonatoBrasileiro {
 
-    public void execute() {
+    public void execute() throws IOException {
     showMenu();
         CartaoRepository cartaoRepository = new CartaoRepository();
         EstatisticaRepository estatisticaRepository = new EstatisticaRepository();
         GolsRepository golsRepository = new GolsRepository();
         PartidaRepository partidaRepository = new PartidaRepository();
         Service service = new Service(cartaoRepository,estatisticaRepository, golsRepository,  partidaRepository);
+        System.out.println(service.mostrarTimeComMaisVitoria());
+        System.out.println(service.mostrarJogadorComMaisGols());
+        System.out.println(service.mostrarJogadorComMaisGolsPenaltis());
+        System.out.println(service.mostrarJogadorComMaisGolsContra());
+        service.mostrarPartidasComMaisGols();
+
     }
     public void showMenu(){
         System.out.println("Olá, bem vindo ao portal do Campeonato Brasileiro");
@@ -30,6 +38,8 @@ public class CampeonatoBrasileiro {
         System.out.println("O placar da partida com mais gols.");
 
     }
+
+
 
 
 

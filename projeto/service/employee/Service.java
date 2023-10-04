@@ -1,6 +1,5 @@
 package projeto.service.employee;
 
-import projeto.domain.Cartao;
 import projeto.repository.CartaoRepository;
 import projeto.repository.EstatisticaRepository;
 import projeto.repository.GolsRepository;
@@ -9,7 +8,9 @@ import projeto.domain.Partida;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Service {
@@ -45,48 +46,4 @@ public class Service {
 
         return timesComMaisVitorias.toString();
     }
-
-    public String estadiosComMenosJogos() throws IOException {
-        Map<String, Long> estadioComMenosJogos = partidaRepository.obterPartidas().stream()
-                .collect(Collectors.groupingBy(Partida::getArena, Collectors.counting()));
-
-        Long menosJogos = Collections.min(estadioComMenosJogos.values());
-
-        List<String> arenaComMenosJogos = estadioComMenosJogos.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(menosJogos))
-                .map(Map.Entry::getKey)
-                .toList();
-
-        return arenaComMenosJogos.toString();
-    }
-
-    public String jogadorComMaisAmarelos() throws IOException {
-        Map<String, Long> maisAmarelos = cartaoRepository.obterCartoes().stream()
-                .filter(cartao -> "Amarelo".equalsIgnoreCase(cartao.getCartao()))
-                .collect(Collectors.groupingBy(Cartao::getAtleta, Collectors.counting()));
-
-        Long maxAmarelosValue = Collections.max(maisAmarelos.values());
-        List<String> jogadoresComMaxAmarelos = maisAmarelos.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(maxAmarelosValue))
-                .map(Map.Entry::getKey)
-                .toList();
-
-        return jogadoresComMaxAmarelos.toString();
-    }
-
-    public String jogadorComMaisVermelhos() throws IOException {
-        Map<String, Long> maisVermelhos = cartaoRepository.obterCartoes().stream()
-                .filter(cartao -> "Vermelho".equalsIgnoreCase(cartao.getCartao()))
-                .collect(Collectors.groupingBy(Cartao::getAtleta, Collectors.counting()));
-
-        Long maxVermelhosValue = Collections.max(maisVermelhos.values());
-        List<String> jogadoresComMaxVermelhos = maisVermelhos.entrySet().stream()
-                .filter(entry -> entry.getValue().equals(maxVermelhosValue))
-                .map(Map.Entry::getKey)
-                .toList();
-
-        return jogadoresComMaxVermelhos.toString();
-    }
-
-
 }
