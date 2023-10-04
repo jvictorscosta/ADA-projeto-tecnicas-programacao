@@ -49,15 +49,65 @@ public class Service {
     }
     public List<String> mostrarJogadorComMaisGols() throws IOException {
         Map<String,Long> jogadorPorGol = golsRepository.obterGols().stream()
-                .filter(gol -> !gol.getTipo_de_gol().equalsIgnoreCase("Penalty"))
+                .filter(gol -> !gol.getTipo_de_gol().equalsIgnoreCase("Gol Contra"))
                 .collect(Collectors.groupingBy(Gol::getAtleta,Collectors.counting()));
+
         Long maximoGols = jogadorPorGol.values().stream().max(Comparator.naturalOrder()).orElse(0L);
+
         List<String> jogadorComMaisGols = jogadorPorGol.entrySet().stream()
                 .filter(entry -> entry.getValue().equals(maximoGols))
                 .map(Map.Entry::getKey).toList();
+
         System.out.println("Jogador ou Jogadores com mais Gols: ");
         return jogadorComMaisGols;
     }
+    public List<String> mostrarJogadorComMaisGolsPenaltis() throws IOException {
+        Map<String,Long> jogadorPorGol = golsRepository.obterGols().stream()
+                .filter(gol -> gol.getTipo_de_gol().equalsIgnoreCase("Penalty"))
+                .collect(Collectors.groupingBy(Gol::getAtleta,Collectors.counting()));
+
+        Long maximoGols = jogadorPorGol.values().stream().max(Comparator.naturalOrder()).orElse(0L);
+
+        List<String> jogadorComMaisGols = jogadorPorGol.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(maximoGols))
+                .map(Map.Entry::getKey).toList();
+
+        System.out.println("Jogador ou Jogadores com mais Gols de Penaltis: ");
+        return jogadorComMaisGols;
+    }
+    public List<String> mostrarJogadorComMaisGolsContra() throws IOException {
+        Map<String,Long> jogadorPorGol = golsRepository.obterGols().stream()
+                .filter(gol -> gol.getTipo_de_gol().equalsIgnoreCase("Gol Contra"))
+                .collect(Collectors.groupingBy(Gol::getAtleta,Collectors.counting()));
+
+        Long maximoGols = jogadorPorGol.values().stream().max(Comparator.naturalOrder()).orElse(0L);
+
+        List<String> jogadorComMaisGols = jogadorPorGol.entrySet().stream()
+                .filter(j -> j.getValue().equals(maximoGols))
+                .map(Map.Entry::getKey).toList();
+
+        System.out.println("Jogador ou Jogadores com mais Gols contra: ");
+        return jogadorComMaisGols;
+    }
+    public List<String> mostrarPartidasComMaisGols() throws IOException {
+        Map<String,Long> placar = golsRepository.obterGols().stream().collect(Collectors.groupingBy(Gol::getPartida_id,Collectors.counting()));
+
+        Long maximoGols = placar.values().stream().max(Comparator.naturalOrder()).orElse(0L);
+        List<String> partidasComMaisGols =  placar.entrySet().stream().filter(p -> p.getValue().equals(maximoGols)).map(Map.Entry::getKey).toList();
+        System.out.println("Placar das partidas com maior quantidade de gols");
+        mostrarPlacar(partidasComMaisGols);
+        return partidasComMaisGols;
+    }
+
+    private void mostrarPlacar(List<String> p) throws IOException {
+        for (String partid:p) {
+            partidaRepository.obterPartidas().stream().filter(partida->partida.getId().equalsIgnoreCase(partid)).forEach(partida -> {
+                System.out.print(""+partida.getMandantePlacar());
+                System.out.println("-" + partida.getVisitantePlacar());
+            });
+        }
+    }
+
 
 
 }

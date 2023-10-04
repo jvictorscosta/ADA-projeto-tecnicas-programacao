@@ -19,6 +19,9 @@ public class CampeonatoBrasileiro {
         Service service = new Service(cartaoRepository,estatisticaRepository, golsRepository,  partidaRepository);
         System.out.println(service.mostrarTimeComMaisVitoria());
         System.out.println(service.mostrarJogadorComMaisGols());
+        System.out.println(service.mostrarJogadorComMaisGolsPenaltis());
+        System.out.println(service.mostrarJogadorComMaisGolsContra());
+        service.mostrarPartidasComMaisGols();
 
     }
     public void showMenu(){

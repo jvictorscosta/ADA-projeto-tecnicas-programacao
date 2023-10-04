@@ -21,11 +21,12 @@ import java.util.stream.Collectors;
             Path pathfull = Paths.get("projeto/repository/campeonato-brasileiro-full.csv");
 
             return Files.lines(pathfull)
-                    .skip(1) // Pular o cabeçalho
+                    .skip(1)
                     .map(line -> line.split(","))
                     .map(this::criarPartida)
                     .collect(Collectors.toList());
         }
+
         private Partida criarPartida(String[] partidas) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
