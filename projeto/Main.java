@@ -35,7 +35,8 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Os estados com menos jogos no período de 2003 - 2008: ");
-                    System.out.println(service.estadoComMenosJogos());
+                    String estadosComMenosJogos = String.join(", ", service.estadoComMenosJogos());
+                    System.out.println(estadosComMenosJogos);
                     break;
                 case 3:
                     System.out.println("O jogador que mais fez gols: ");
@@ -44,19 +45,23 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("O jogador que mais fez gols de pênalti: ");
-                    System.out.println(service.jogadorComMaisGolsPenaltis());
+                    String nomeDoJogadorPenalti = String.join(", ", service.jogadorComMaisGolsPenaltis());
+                    System.out.println(nomeDoJogadorPenalti);
                     break;
                 case 5:
                     System.out.println("Os jogadores que mais fizeram gols contras: ");
-                    System.out.println(service.jogadorComMaisGolsContra());
+                    String nomeDoJogadorGolContra = String.join(", ", service.jogadorComMaisGolsContra());
+                    System.out.println(nomeDoJogadorGolContra);
                     break;
                 case 6:
                     System.out.println("O jogador que mais recebeu cartões amarelos: ");
-                    System.out.println(service.jogadorComMaisAmarelos());
+                    String nomeDoJogadorAmarelo = String.join(", ", service.jogadorComMaisAmarelos());
+                    System.out.println(nomeDoJogadorAmarelo);
                     break;
                 case 7:
                     System.out.println("O jogador que mais recebeu cartões vermelhos: ");
-                    System.out.println(service.jogadorComMaisVermelhos());
+                    String nomeDoJogadorVermelho = String.join(", ", service.jogadorComMaisVermelhos());
+                    System.out.println(nomeDoJogadorVermelho);
                     break;
                 case 8:
                     service.mostrarPartidasComMaisGols();

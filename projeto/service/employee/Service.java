@@ -89,11 +89,11 @@ public class Service {
                 .max(Comparator.naturalOrder())
                 .orElse(0L);
 
-        List<String> jogadorComMaisGols = jogadorPorGol.entrySet().stream()
+        List<String> jogadorComMaisGolsContras = jogadorPorGol.entrySet().stream()
                 .filter(j -> j.getValue().equals(maximoGols))
                 .map(Map.Entry::getKey).toList();
 
-        return jogadorComMaisGols;
+        return jogadorComMaisGolsContras;
     }
     public List<String> mostrarPartidasComMaisGols() throws IOException {
         Map<String,Long> placar = golsRepository.obterGols().stream().collect(Collectors.groupingBy(Gol::getPartida_id,Collectors.counting()));
@@ -116,7 +116,7 @@ public class Service {
         }
     }
 
-    public String estadoComMenosJogos() throws IOException {
+    public List<String> estadoComMenosJogos() throws IOException {
         Map<String, Long> estadoComMenosJogos = partidaRepository.obterPartidas().stream()
                 .collect(Collectors.groupingBy(Partida::getMandanteEstado, Collectors.counting()));
 
@@ -127,10 +127,10 @@ public class Service {
                 .map(Map.Entry::getKey)
                 .toList();
 
-        return estadosComMenosJogos.toString();
+        return estadosComMenosJogos;
     }
 
-    public String jogadorComMaisAmarelos() throws IOException {
+    public List<String> jogadorComMaisAmarelos() throws IOException {
         Map<String, Long> maisAmarelos = cartaoRepository.obterCartoes().stream()
                 .filter(cartao -> "Amarelo".equalsIgnoreCase(cartao.getCartao()))
                 .collect(Collectors.groupingBy(Cartao::getAtleta, Collectors.counting()));
@@ -141,10 +141,10 @@ public class Service {
                 .map(Map.Entry::getKey)
                 .toList();
 
-        return jogadoresComMaxAmarelos.toString();
+        return jogadoresComMaxAmarelos;
     }
 
-    public String jogadorComMaisVermelhos() throws IOException {
+    public List<String> jogadorComMaisVermelhos() throws IOException {
         Map<String, Long> maisVermelhos = cartaoRepository.obterCartoes().stream()
                 .filter(cartao -> "Vermelho".equalsIgnoreCase(cartao.getCartao()))
                 .collect(Collectors.groupingBy(Cartao::getAtleta, Collectors.counting()));
@@ -155,7 +155,7 @@ public class Service {
                 .map(Map.Entry::getKey)
                 .toList();
 
-        return jogadoresComMaxVermelhos.toString();
+        return jogadoresComMaxVermelhos;
     }
 
 }
