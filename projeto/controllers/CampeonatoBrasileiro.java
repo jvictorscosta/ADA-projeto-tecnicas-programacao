@@ -21,7 +21,10 @@ public class CampeonatoBrasileiro {
         System.out.println(service.mostrarJogadorComMaisGols());
         System.out.println(service.mostrarJogadorComMaisGolsPenaltis());
         System.out.println(service.mostrarJogadorComMaisGolsContra());
-        service.mostrarPartidasComMaisGols();
+        System.out.println(service.mostrarPartidasComMaisGols());
+        System.out.println(service.estadiosComMenosJogos());
+        System.out.println(service.jogadorComMaisAmarelos());
+        System.out.println(service.jogadorComMaisVermelhos());
 
     }
     public void showMenu(){
