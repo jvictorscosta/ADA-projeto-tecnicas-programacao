@@ -8,6 +8,8 @@ import projeto.repository.PartidaRepository;
 import projeto.service.employee.Service;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -28,7 +30,8 @@ public class Main {
             switch (opcaoDesejada){
                 case 1:
                     System.out.println("Os times que mais venceram no ano de 2008: ");
-                    System.out.println(service.mostrarTimeComMaisVitoria());
+                    String nomesDosTimes = String.join(", ", service.mostrarTimeComMaisVitoria());
+                    System.out.println(nomesDosTimes);
                     break;
                 case 2:
                     System.out.println("Os estados com menos jogos no período de 2003 - 2008: ");
@@ -36,7 +39,8 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("O jogador que mais fez gols: ");
-                    System.out.println(service.jogadorComMaisGols());
+                    String nomeDoJogador = String.join(", ", service.jogadorComMaisGols());
+                    System.out.println(nomeDoJogador);
                     break;
                 case 4:
                     System.out.println("O jogador que mais fez gols de pênalti: ");

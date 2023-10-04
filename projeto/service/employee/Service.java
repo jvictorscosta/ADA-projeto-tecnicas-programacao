@@ -28,7 +28,7 @@ public class Service {
         this.golsRepository = golsRepository;
         this.partidaRepository = partidaRepository;
     }
-    public String mostrarTimeComMaisVitoria ( ) throws IOException {
+    public List<String> mostrarTimeComMaisVitoria ( ) throws IOException {
         String ano="2008";
         Map<String, Long> vitoriasPorTime = partidaRepository.obterPartidas().stream()
                 .filter(partida -> {
@@ -46,7 +46,8 @@ public class Service {
                 .filter(entry -> entry.getValue().equals(maximoVitorias))
                 .map(Map.Entry::getKey)
                 .toList();
-        return timesComMaisVitorias.toString();
+
+        return timesComMaisVitorias;
     }
     public List<String> jogadorComMaisGols() throws IOException {
         Map<String,Long> jogadorPorGol = golsRepository.obterGols().stream()
@@ -59,7 +60,8 @@ public class Service {
 
         List<String> jogadorComMaisGols = jogadorPorGol.entrySet().stream()
                 .filter(entry -> entry.getValue().equals(maximoGols))
-                .map(Map.Entry::getKey).toList();
+                .map(Map.Entry::getKey)
+                .toList();
 
         return jogadorComMaisGols;
     }
@@ -72,11 +74,11 @@ public class Service {
                 .max(Comparator.naturalOrder())
                 .orElse(0L);
 
-        List<String> jogadorComMaisGols = jogadorPorGol.entrySet().stream()
+        List<String> jogadorComMaisGolsPenaltis = jogadorPorGol.entrySet().stream()
                 .filter(entry -> entry.getValue().equals(maximoGols))
                 .map(Map.Entry::getKey).toList();
 
-        return jogadorComMaisGols;
+        return jogadorComMaisGolsPenaltis;
     }
     public List<String> jogadorComMaisGolsContra() throws IOException {
         Map<String,Long> jogadorPorGol = golsRepository.obterGols().stream()
