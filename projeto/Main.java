@@ -8,7 +8,7 @@ import projeto.service.employee.Service;
 
 import java.io.IOException;
 
-public class main {
+public class Main {
     public static void main(String[] args) throws IOException {
         CartaoRepository cartaoRepository = new CartaoRepository();
         EstatisticaRepository estatisticaRepository = new EstatisticaRepository();
