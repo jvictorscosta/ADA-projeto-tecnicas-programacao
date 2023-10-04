@@ -18,5 +18,8 @@ public class main {
         Service service = new Service(cartaoRepository, estatisticaRepository, golsRepository, partidaRepository);
 
         System.out.println(service.mostrarTimeComMaisVitoria());
+        System.out.println(service.estadiosComMenosJogos());
+        System.out.println(service.jogadorComMaisAmarelos());
+        System.out.println(service.jogadorComMaisVermelhos());
     }
 }

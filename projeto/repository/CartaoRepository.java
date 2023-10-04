@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class CartaoRepository {
 
     public List<Cartao> obterCartoes() throws IOException {
-        Path pathCartao = Paths.get("projeto/repository/campeonato-brasileiro-full.csv");
+        Path pathCartao = Paths.get("projeto/repository/campeonato-brasileiro-cartoes.csv");
 
         return Files.lines(pathCartao)
                 .skip(1) // Pular o cabeçalho
