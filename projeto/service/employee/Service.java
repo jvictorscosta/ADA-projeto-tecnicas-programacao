@@ -1,5 +1,6 @@
 package projeto.service.employee;
 
+import projeto.domain.Gol;
 import projeto.repository.CartaoRepository;
 import projeto.repository.EstatisticaRepository;
 import projeto.repository.GolsRepository;
@@ -43,7 +44,20 @@ public class Service {
                 .filter(entry -> entry.getValue().equals(maximoVitorias))
                 .map(Map.Entry::getKey)
                 .toList();
-
+        System.out.println("Time com Mais Vitorias em "+ ano);
         return timesComMaisVitorias.toString();
     }
+    public List<String> mostrarJogadorComMaisGols() throws IOException {
+        Map<String,Long> jogadorPorGol = golsRepository.obterGols().stream()
+                .filter(gol -> !gol.getTipo_de_gol().equalsIgnoreCase("Penalty"))
+                .collect(Collectors.groupingBy(Gol::getAtleta,Collectors.counting()));
+        Long maximoGols = jogadorPorGol.values().stream().max(Comparator.naturalOrder()).orElse(0L);
+        List<String> jogadorComMaisGols = jogadorPorGol.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(maximoGols))
+                .map(Map.Entry::getKey).toList();
+        System.out.println("Jogador ou Jogadores com mais Gols: ");
+        return jogadorComMaisGols;
+    }
+
+
 }
