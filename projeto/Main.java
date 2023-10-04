@@ -1,12 +1,69 @@
 package projeto;
 
 import projeto.controllers.CampeonatoBrasileiro;
+import projeto.repository.CartaoRepository;
+import projeto.repository.EstatisticaRepository;
+import projeto.repository.GolsRepository;
+import projeto.repository.PartidaRepository;
+import projeto.service.employee.Service;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
+        CartaoRepository cartaoRepository = new CartaoRepository();
+        EstatisticaRepository estatisticaRepository = new EstatisticaRepository();
+        GolsRepository golsRepository = new GolsRepository();
+        PartidaRepository partidaRepository = new PartidaRepository();
+        Service service = new Service(cartaoRepository,estatisticaRepository, golsRepository,  partidaRepository);
+
         CampeonatoBrasileiro campeonatoBrasileiro = new CampeonatoBrasileiro();
-        campeonatoBrasileiro.execute();
+        campeonatoBrasileiro.showMenu();
+        Scanner sc = new Scanner(System.in);
+        Integer opcaoDesejada = sc.nextInt();
+
+        while (opcaoDesejada != 0){
+            switch (opcaoDesejada){
+                case 1:
+                    System.out.println("Os times que mais venceram no ano de 2008: ");
+                    System.out.println(service.mostrarTimeComMaisVitoria());
+                    break;
+                case 2:
+                    System.out.println("Os estados com menos jogos no período de 2003 - 2008: ");
+                    System.out.println(service.estadoComMenosJogos());
+                    break;
+                case 3:
+                    System.out.println("O jogador que mais fez gols: ");
+                    System.out.println(service.jogadorComMaisGols());
+                    break;
+                case 4:
+                    System.out.println("O jogador que mais fez gols de pênalti: ");
+                    System.out.println(service.jogadorComMaisGolsPenaltis());
+                    break;
+                case 5:
+                    System.out.println("Os jogadores que mais fizeram gols contras: ");
+                    System.out.println(service.jogadorComMaisGolsContra());
+                    break;
+                case 6:
+                    System.out.println("O jogador que mais recebeu cartões amarelos: ");
+                    System.out.println(service.jogadorComMaisAmarelos());
+                    break;
+                case 7:
+                    System.out.println("O jogador que mais recebeu cartões vermelhos: ");
+                    System.out.println(service.jogadorComMaisVermelhos());
+                    break;
+                case 8:
+                    service.mostrarPartidasComMaisGols();
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente noamente.");
+            }
+            System.out.println("Informe a próxima opção(ou 0 para sair): ");
+            opcaoDesejada = sc.nextInt();
+        }
+
+        sc.close();
     }
 }
