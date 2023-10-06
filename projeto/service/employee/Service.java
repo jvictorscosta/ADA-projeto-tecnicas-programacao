@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.lang.Long.parseLong;
+
 public class Service {
     private CartaoRepository cartaoRepository;
     private EstatisticaRepository estatisticaRepository;
@@ -95,18 +97,17 @@ public class Service {
 
         return jogadorComMaisGolsContras;
     }
-    public List<String> mostrarPartidasComMaisGols() throws IOException {
-        Map<String,Long> placar = golsRepository.obterGols().stream().collect(Collectors.groupingBy(Gol::getPartida_id,Collectors.counting()));
 
-        Long maximoGols = placar.values().stream().max(Comparator.naturalOrder()).orElse(0L);
-        List<String> partidasComMaisGols =  placar.entrySet().stream().filter(p -> p.getValue().equals(maximoGols))
+    public List<String> mostrarPartidasComMaisGols() throws IOException {
+        Map<String,Long> somaPlacar= partidaRepository.obterPartidas().stream().collect(Collectors.toMap(partida -> partida.getId(),partida ->(parseLong(partida.getVisitantePlacar()+partida.getMandantePlacar()))));
+        Long maximoGols = somaPlacar.values().stream().max(Comparator.naturalOrder()).orElse(0L);
+        List<String> partidasComMaisGols =  somaPlacar.entrySet().stream().filter(p -> p.getValue().equals(maximoGols))
                 .map(Map.Entry::getKey)
                 .toList();
         System.out.println("Placar das partidas com maior quantidade de gols");
         mostrarPlacar(partidasComMaisGols);
         return partidasComMaisGols;
     }
-
     private void mostrarPlacar(List<String> p) throws IOException {
         for (String partid:p) {
             partidaRepository.obterPartidas().stream().filter(partida->partida.getId().equalsIgnoreCase(partid)).forEach(partida -> {
